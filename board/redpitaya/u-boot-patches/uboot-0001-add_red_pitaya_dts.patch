@@ -1,0 +1,67 @@
+Index: u-boot-2016.01-rc3/arch/arm/dts/Makefile
+===================================================================
+--- u-boot-2016.01-rc3.orig/arch/arm/dts/Makefile
++++ u-boot-2016.01-rc3/arch/arm/dts/Makefile
+@@ -66,6 +66,7 @@ dtb-$(CONFIG_ARCH_ZYNQ) += zynq-zc702.dt
+ 	zynq-zybo.dtb \
+ 	zynq-microzed.dtb \
+ 	zynq-picozed.dtb \
++	zynq-red-pitaya.dtb \
+ 	zynq-zc770-xm010.dtb \
+ 	zynq-zc770-xm011.dtb \
+ 	zynq-zc770-xm012.dtb \
+Index: u-boot-2016.01-rc3/arch/arm/dts/zynq-red-pitaya.dts
+===================================================================
+--- /dev/null
++++ u-boot-2016.01-rc3/arch/arm/dts/zynq-red-pitaya.dts
+@@ -0,0 +1,50 @@
++/*
++ * Red Pitaya board DTS
++ *
++ *  Copyright (C) 2011 - 2015 Xilinx
++ *
++ * SPDX-License-Identifier:	GPL-2.0+
++ */
++/dts-v1/;
++#include "zynq-7000.dtsi"
++
++/ {
++	model = "Red Pitaya Board";
++	compatible = "redpitaya,zynq-red-pitaya", "xlnx,zynq-7000";
++
++	aliases {
++		ethernet0 = &gem0;
++		serial0 = &uart0;
++		spi0 = &qspi;
++		mmc0 = &sdhci0;
++	};
++
++	memory {
++		device_type = "memory";
++		reg = <0x0 0x1E000000>;
++	};
++
++	chosen {
++		bootargs = "earlyprintk";
++		stdout-path = "serial0:115200n8";
++	};
++
++};
++
++&clkc {
++	ps-clk-frequency = <33333333>;
++};
++
++&sdhci0 {
++	u-boot,dm-pre-reloc;
++	status = "okay";
++};
++
++&uart0 {
++	u-boot,dm-pre-reloc;
++	status = "okay";
++};
++
++&qspi {
++	status = "okay";
++};
