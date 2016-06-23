@@ -14,7 +14,7 @@ Index: u-boot-2016.01-rc3/include/configs/zynq_red_pitaya.h
 +
 +#define CONFIG_SYS_NO_FLASH
 +
-+#define CONFIG_ZYNQ_SDHCI0
++#define CONFIG_ZYNQ_SDHCI
 +#define CONFIG_ZYNQ_USB
 +#define CONFIG_ZYNQ_I2C0
 +#define CONFIG_ZYNQ_EEPROM

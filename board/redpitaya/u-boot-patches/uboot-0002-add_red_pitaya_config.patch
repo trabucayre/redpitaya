@@ -1,7 +1,7 @@
-Index: u-boot-2016.01-rc3/arch/arm/mach-zynq/Kconfig
+Index: u-boot-2016.03/arch/arm/mach-zynq/Kconfig
 ===================================================================
---- u-boot-2016.01-rc3.orig/arch/arm/mach-zynq/Kconfig
-+++ u-boot-2016.01-rc3/arch/arm/mach-zynq/Kconfig
+--- u-boot-2016.03.orig/arch/arm/mach-zynq/Kconfig
++++ u-boot-2016.03/arch/arm/mach-zynq/Kconfig
 @@ -21,6 +21,9 @@ config TARGET_ZYNQ_MICROZED
  config TARGET_ZYNQ_PICOZED
  	bool "Zynq PicoZed"
@@ -20,11 +20,11 @@ Index: u-boot-2016.01-rc3/arch/arm/mach-zynq/Kconfig
  	default "zynq_zc70x" if TARGET_ZYNQ_ZC702 || TARGET_ZYNQ_ZC706
  	default "zynq_zc770" if TARGET_ZYNQ_ZC770
  	default "zynq_zybo" if TARGET_ZYNQ_ZYBO
-Index: u-boot-2016.01-rc3/configs/zynq_red_pitaya_defconfig
+Index: u-boot-2016.03/configs/zynq_red_pitaya_defconfig
 ===================================================================
 --- /dev/null
-+++ u-boot-2016.01-rc3/configs/zynq_red_pitaya_defconfig
-@@ -0,0 +1,20 @@
++++ u-boot-2016.03/configs/zynq_red_pitaya_defconfig
+@@ -0,0 +1,23 @@
 +CONFIG_ARM=y
 +CONFIG_ARCH_ZYNQ=y
 +CONFIG_TARGET_ZYNQ_RED_PITAYA=y
@@ -33,12 +33,15 @@ Index: u-boot-2016.01-rc3/configs/zynq_red_pitaya_defconfig
 +CONFIG_FIT=y
 +CONFIG_FIT_VERBOSE=y
 +CONFIG_FIT_SIGNATURE=y
++CONFIG_SYS_PROMPT="Zynq> "
 +# CONFIG_CMD_IMLS is not set
 +# CONFIG_CMD_FLASH is not set
 +CONFIG_CMD_GPIO=y
 +# CONFIG_CMD_SETEXPR is not set
 +CONFIG_NET_RANDOM_ETHADDR=y
 +CONFIG_OF_SEPARATE=y
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_ZYNQ_SDHCI=y
 +CONFIG_ZYNQ_GEM=y
 +CONFIG_ZYNQ_QSPI=y
 +CONFIG_DEBUG_UART=y
