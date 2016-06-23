@@ -24,7 +24,7 @@ Index: u-boot-2016.03/configs/zynq_red_pitaya_defconfig
 ===================================================================
 --- /dev/null
 +++ u-boot-2016.03/configs/zynq_red_pitaya_defconfig
-@@ -0,0 +1,23 @@
+@@ -0,0 +1,22 @@
 +CONFIG_ARM=y
 +CONFIG_ARCH_ZYNQ=y
 +CONFIG_TARGET_ZYNQ_RED_PITAYA=y
@@ -39,7 +39,6 @@ Index: u-boot-2016.03/configs/zynq_red_pitaya_defconfig
 +CONFIG_CMD_GPIO=y
 +# CONFIG_CMD_SETEXPR is not set
 +CONFIG_NET_RANDOM_ETHADDR=y
-+CONFIG_OF_SEPARATE=y
 +CONFIG_SPL_DM_SEQ_ALIAS=y
 +CONFIG_ZYNQ_SDHCI=y
 +CONFIG_ZYNQ_GEM=y

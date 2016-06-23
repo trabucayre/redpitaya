@@ -1,8 +1,8 @@
-Index: u-boot-2016.01-rc3/include/configs/zynq_red_pitaya.h
+Index: u-boot-2016.03/include/configs/zynq_red_pitaya.h
 ===================================================================
 --- /dev/null
-+++ u-boot-2016.01-rc3/include/configs/zynq_red_pitaya.h
-@@ -0,0 +1,71 @@
++++ u-boot-2016.03/include/configs/zynq_red_pitaya.h
+@@ -0,0 +1,70 @@
 +#ifndef __CONFIG_ZYNQ_RED_PITAYA_H
 +#define __CONFIG_ZYNQ_RED_PITAYA_H
 +
@@ -14,7 +14,6 @@ Index: u-boot-2016.01-rc3/include/configs/zynq_red_pitaya.h
 +
 +#define CONFIG_SYS_NO_FLASH
 +
-+#define CONFIG_ZYNQ_SDHCI
 +#define CONFIG_ZYNQ_USB
 +#define CONFIG_ZYNQ_I2C0
 +#define CONFIG_ZYNQ_EEPROM
