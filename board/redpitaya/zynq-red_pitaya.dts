@@ -67,7 +67,7 @@
 		compatible = "foo,dmacopy-0.1";
 		label = "dmacopy0";
 		reg = < 0x40400000 0x0000FFFF >,
-				<0x43C00000 0x0000FFFF>;
+				<0x43C10000 0x0000FFFF>;
 		interrupt-parent = <&intc>;
 		interrupts = <0 59 4>; /* 1 */
 		dma0_base = <0x40400000>;
@@ -81,13 +81,13 @@
 
 &gem0 {
 	phy-mode = "rgmii-id";
-	phy-handle = <&phy0>;
+	phy-handle = <&ethernet_phy>;
 	status = "okay";
 
-	phy0: phy@7 {
+	ethernet_phy: ethernet-phy@0 {
 		compatible = "lantiq,phy11g";
 		device_type = "ethernet-phy";
-		reg = <1>;
+		reg = <0>;
 	};
 };
 
