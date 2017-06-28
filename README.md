@@ -2,14 +2,16 @@
 
 This repository provides buildroot based support for redpitaya board.
 
-It uses the BR2_EXTERNAL mecanism to add this support in buildroot
+It uses the BR2_EXTERNAL mecanism to add this support in buildroot.
+
+This support has been tested with the current (20170628) LTS.
 
 How-to use it
 =============
 
-You need a fresh buildroot copy
+You need to download corresponding tarball:
 
-	git clone git://git.buildroot.net/buildroot
+	wget https://buildroot.org/downloads/buildroot-2017.02.3.tar.gz
 
 To add the support you need to source **sourceme.ggm** file to add **BR2_EXTERNAL** to
 your env (it's possible to add <code>export
