@@ -85,7 +85,6 @@
 	status = "okay";
 
 	ethernet_phy: ethernet-phy@0 {
-		compatible = "lantiq,phy11g";
 		device_type = "ethernet-phy";
 		reg = <0>;
 	};
@@ -97,6 +96,7 @@
 	eep@50 {
 		compatible = "24c64";
 		reg = <0x50>;
+		pagesize = <32>;
 	};
 
 	/*hwmon@40 {
