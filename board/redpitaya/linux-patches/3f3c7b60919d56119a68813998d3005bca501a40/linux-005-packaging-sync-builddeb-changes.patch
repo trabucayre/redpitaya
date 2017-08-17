@@ -1,0 +1,30 @@
+Index: linux-xilinx-v2017.2/scripts/Makefile.lib
+===================================================================
+--- linux-xilinx-v2017.2.orig/scripts/Makefile.lib
++++ linux-xilinx-v2017.2/scripts/Makefile.lib
+@@ -301,10 +301,14 @@ cmd_dt_S_dtb=						\
+ $(obj)/%.dtb.S: $(obj)/%.dtb
+ 	$(call cmd,dt_S_dtb)
+ 
++ifeq ($(CONFIG_OF_OVERLAY),y)
++DTC_FLAGS += -@
++endif
++
+ quiet_cmd_dtc = DTC     $@
+ cmd_dtc = mkdir -p $(dir ${dtc-tmp}) ; \
+ 	$(CPP) $(dtc_cpp_flags) -x assembler-with-cpp -o $(dtc-tmp) $< ; \
+-	$(DTC) -O dtb -o $@ -b 0 \
++	$(DTC) -O dtb -o $@ -b 0 -@ \
+ 		-i $(dir $<) $(DTC_FLAGS) \
+ 		-d $(depfile).dtc.tmp $(dtc-tmp) ; \
+ 	cat $(depfile).pre.tmp $(depfile).dtc.tmp > $(depfile)
+@@ -312,6 +316,9 @@ cmd_dtc = mkdir -p $(dir ${dtc-tmp}) ; \
+ $(obj)/%.dtb: $(src)/%.dts FORCE
+ 	$(call if_changed_dep,dtc)
+ 
++$(obj)/%.dtbo: $(src)/%.dtso FORCE
++	$(call if_changed_dep,dtc)
++
+ dtc-tmp = $(subst $(comma),_,$(dot-target).dts.tmp)
+ 
+ # Bzip2
