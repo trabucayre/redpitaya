@@ -11975,7 +11975,7 @@ Index: linux-3f3c7b60919d56119a68813998d3005bca501a40/drivers/gpio/gpio-zynq.c
  }
  
  /**
-@@ -567,11 +584,45 @@ static void zynq_gpio_irq_release_resour
+@@ -567,11 +584,47 @@ static void zynq_gpio_irq_release_resour
  	module_put(chip->gpiodev->owner);
  }
  
@@ -11989,10 +11989,12 @@ Index: linux-3f3c7b60919d56119a68813998d3005bca501a40/drivers/gpio/gpio-zynq.c
 +
 +	device_pin_num = irq_data->hwirq;
 +	zynq_gpio_get_bank_pin(device_pin_num, &bank_num, &bank_pin_num, gpio);
++	raw_spin_lock(&zynq_gpio_lock);
 +	writel_relaxed(BIT(bank_pin_num),
 +		       gpio->base_addr + ZYNQ_GPIO_INTDIS_OFFSET(bank_num));
 +	writel_relaxed(BIT(bank_pin_num),
 +		       gpio->base_addr + ZYNQ_GPIO_INTSTS_OFFSET(bank_num));
++	raw_spin_unlock(&zynq_gpio_lock);
 +}
 +
 +static void zynq_gpio_release_irq(struct irq_data *irq_data)
@@ -12022,7 +12024,7 @@ Index: linux-3f3c7b60919d56119a68813998d3005bca501a40/drivers/gpio/gpio-zynq.c
  	.irq_mask	= zynq_gpio_irq_mask,
  	.irq_unmask	= zynq_gpio_irq_unmask,
  	.irq_set_type	= zynq_gpio_set_irq_type,
-@@ -583,9 +634,13 @@ static struct irq_chip zynq_gpio_level_i
+@@ -583,9 +636,13 @@ static struct irq_chip zynq_gpio_level_i
  };
  
  static struct irq_chip zynq_gpio_edge_irqchip = {
@@ -12037,6 +12039,15 @@ Index: linux-3f3c7b60919d56119a68813998d3005bca501a40/drivers/gpio/gpio-zynq.c
  	.irq_mask	= zynq_gpio_irq_mask,
  	.irq_unmask	= zynq_gpio_irq_unmask,
  	.irq_set_type	= zynq_gpio_set_irq_type,
+@@ -610,7 +667,7 @@ static void zynq_gpio_handle_bank_irq(st
+ 		unsigned int gpio_irq;
+ 
+ 		gpio_irq = irq_find_mapping(irqdomain, offset + bank_offset);
+-		generic_handle_irq(gpio_irq);
++		ipipe_handle_demuxed_irq(gpio_irq);
+ 	}
+ }
+ 
 Index: linux-3f3c7b60919d56119a68813998d3005bca501a40/drivers/gpu/ipu-v3/ipu-common.c
 ===================================================================
 --- linux-3f3c7b60919d56119a68813998d3005bca501a40.orig/drivers/gpu/ipu-v3/ipu-common.c
