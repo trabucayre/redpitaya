@@ -4,7 +4,7 @@ This repository provides buildroot based support for redpitaya board.
 
 It uses the BR2_EXTERNAL mecanism to add this support in buildroot.
 
-This support has been tested with the latsest long term support release of buildroot (2018.02.2).
+This support has been tested with the latest long term support release of buildroot (2018.02.2).
 
 How-to use it
 =============
