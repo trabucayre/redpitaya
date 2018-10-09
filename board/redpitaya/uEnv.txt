@@ -7,4 +7,4 @@ kernel_image=zImage
 devicetree_image=zynq-red_pitaya.dtb
 extrabootargs=ip=${ipaddr}:${serverip}:${gatewayip}:${netmask}:${hostname}:eth0:off
 mmcargs=setenv bootargs console=ttyPS0,115200 root=/dev/mmcblk0p2 rw rootwait earlyprintk
-sdboot=run fpgaboot; run mmcargs; load mmc 0 0x2080000 ${kernel_image} && load mmc 0 0x2000000 ${devicetree_image} && bootz 0x2080000 - 0x2000000
+bootcmd_mmc0=run fpgaboot; run mmcargs; load mmc 0 0x2080000 ${kernel_image} && load mmc 0 0x2000000 ${devicetree_image} && bootz 0x2080000 - 0x2000000
