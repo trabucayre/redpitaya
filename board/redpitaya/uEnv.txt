@@ -3,8 +3,8 @@ serverip=192.168.0.2
 gatewayip=192.168.0.2
 netmask=255.255.255.0
 hostname=redpitaya
-kernel_image=uImage
+kernel_image=zImage
 devicetree_image=zynq-red_pitaya.dtb
 extrabootargs=ip=${ipaddr}:${serverip}:${gatewayip}:${netmask}:${hostname}:eth0:off
 mmcargs=setenv bootargs console=ttyPS0,115200 root=/dev/mmcblk0p2 rw rootwait earlyprintk
-sdboot=run fpgaboot; run mmcargs; load mmc 0 0x2080000 ${kernel_image} && load mmc 0 0x2000000 ${devicetree_image} && bootm 0x2080000 - 0x2000000
+sdboot=run fpgaboot; run mmcargs; load mmc 0 0x2080000 ${kernel_image} && load mmc 0 0x2000000 ${devicetree_image} && bootz 0x2080000 - 0x2000000
