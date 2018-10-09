@@ -2,7 +2,7 @@ Index: u-boot-2018.09/configs/zynq_red_pitaya_defconfig
 ===================================================================
 --- /dev/null
 +++ u-boot-2018.09/configs/zynq_red_pitaya_defconfig
-@@ -0,0 +1,61 @@
+@@ -0,0 +1,63 @@
 +CONFIG_ARM=y
 +CONFIG_SYS_CONFIG_NAME="zynq_red_pitaya"
 +CONFIG_ARCH_ZYNQ=y
@@ -15,6 +15,8 @@ Index: u-boot-2018.09/configs/zynq_red_pitaya_defconfig
 +CONFIG_FIT=y
 +CONFIG_FIT_SIGNATURE=y
 +CONFIG_FIT_VERBOSE=y
++CONFIG_USE_BOOTCOMMAND=y
++CONFIG_BOOTCOMMAND="run $modeboot || run distro_bootcmd"
 +CONFIG_SYS_NO_FLASH=y
 +# CONFIG_DISPLAY_CPUINFO is not set
 +CONFIG_SPL_STACK_R=y
@@ -59,8 +61,8 @@ Index: u-boot-2018.09/configs/zynq_red_pitaya_defconfig
 +CONFIG_USB_ULPI=y
 +CONFIG_USB_STORAGE=y
 +CONFIG_USB_GADGET=y
-+CONFIG_CI_UDC=y
-+CONFIG_USB_GADGET_DOWNLOAD=y
 +CONFIG_USB_GADGET_MANUFACTURER="Xilinx"
 +CONFIG_USB_GADGET_VENDOR_NUM=0x03fd
 +CONFIG_USB_GADGET_PRODUCT_NUM=0x0300
++CONFIG_CI_UDC=y
++CONFIG_USB_GADGET_DOWNLOAD=y
