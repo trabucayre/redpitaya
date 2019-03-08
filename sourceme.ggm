@@ -1,3 +1,6 @@
 ABSOLUTE_PATH=$(cd `dirname "${BASH_SOURCE[0]}"` && pwd)
 unset LD_LIBRARY_PATH
-export BR2_EXTERNAL=$ABSOLUTE_PATH:$BR2_EXTERNAL
+
+if [ -z "$(echo $BR2_EXTERNAL | grep $ABSOLUTE_PATH)" ]; then
+	export BR2_EXTERNAL=$ABSOLUTE_PATH:$BR2_EXTERNAL
+fi
