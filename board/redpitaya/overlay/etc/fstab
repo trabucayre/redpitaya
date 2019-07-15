@@ -9,3 +9,4 @@ sysfs		/sys		sysfs	defaults	0	0
 /dev/mmcblk0p1 	/boot	vfat	defaults 	0	0
 configfs    /sys/kernel/config configfs defaults 0  0
 #192.168.0.2:/nfs/redpitaya /usr/local nfs defaults,noauto,nolock 0  0
+#192.168.0.2:/nfs/redpitaya16 /usr/local nfs defaults,noauto,nolock 0  0
