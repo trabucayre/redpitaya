@@ -18,17 +18,17 @@ To add the support you need to source **sourceme.ggm** file to add **BR2_EXTERNA
 your env (it's possible to add <code>export
 BR2_EXTERNAL=/somewhere/redpitaya</code> in *.bashrc*).
 
-Now, in buildroot directory you can use 
+Now, in buildroot directory:
+
+You can use for 14-bit Redpitaya
 ```bash
 make redpitaya_defconfig
 ```
-for redpitaya 14 bits
-or
+or for 16-bit Redpitaya
 ```bash
 make redpitaya16_defconfig
 ```
-for redpitaya 16 bits
-or
+or for real time extension of Linux for the 14-bit Redpitaya
 ```bash
 make redpitaya_xenomai_defconfig
 ```
