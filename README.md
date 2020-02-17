@@ -62,7 +62,7 @@ Tweaks
 
 ### IP address
 By default, the *redpitaya* IP address is 192.168.0.10, to change this value
-*/etc/networks/interfaces* must be updated. This file is located in the second
+*/etc/network/interfaces* must be updated. This file is located in the second
 partition of the SD card;
 
 default configuration is:
