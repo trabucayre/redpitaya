@@ -2,7 +2,7 @@ Index: u-boot-2019.07/board/xilinx/zynq/zynq-red-pitaya16/ps7_init_gpl.c
 ===================================================================
 --- /dev/null
 +++ u-boot-2019.07/board/xilinx/zynq/zynq-red-pitaya16/ps7_init_gpl.c
-@@ -0,0 +1,12606 @@
+@@ -0,0 +1,12507 @@
 +/******************************************************************************
 +* (c) Copyright 2010-2018 Xilinx, Inc. All rights reserved.
 +*
@@ -2577,17 +2577,14 @@ Index: u-boot-2019.07/board/xilinx/zynq/zynq-red-pitaya16/ps7_init_gpl.c
 +    // .. Speed = 1
 +    // .. ==> 0XF800074C[8:8] = 0x00000001U
 +    // ..     ==> MASK : 0x00000100U    VAL : 0x00000100U
-+    // .. IO_Type = 2
-+    // .. ==> 0XF800074C[11:9] = 0x00000002U
-+    // ..     ==> MASK : 0x00000E00U    VAL : 0x00000400U
 +    // .. PULLUP = 0
 +    // .. ==> 0XF800074C[12:12] = 0x00000000U
 +    // ..     ==> MASK : 0x00001000U    VAL : 0x00000000U
-+    // .. DisableRcvr = 0
-+    // .. ==> 0XF800074C[13:13] = 0x00000000U
-+    // ..     ==> MASK : 0x00002000U    VAL : 0x00000000U
++    // .. DisableRcvr = 1
++    // .. ==> 0XF800074C[13:13] = 0x00000001U
++    // ..     ==> MASK : 0x00002000U    VAL : 0x00002000U
 +    // .. 
-+    EMIT_MASKWRITE(0XF800074C, 0x00003FFFU ,0x00000502U),
++    EMIT_MASKWRITE(0XF800074C, 0x000031FFU ,0x00002102U),
 +    // .. TRI_ENABLE = 0
 +    // .. ==> 0XF8000750[0:0] = 0x00000000U
 +    // ..     ==> MASK : 0x00000001U    VAL : 0x00000000U
@@ -3960,40 +3957,10 @@ Index: u-boot-2019.07/board/xilinx/zynq/zynq-red-pitaya16/ps7_init_gpl.c
 +    // .. FINISH: FPGA RESETS TO 0
 +    // .. START: AFI REGISTERS
 +    // .. .. START: AFI0 REGISTERS
-+    // .. .. n32BitEn = 1
-+    // .. .. ==> 0XF8008000[0:0] = 0x00000001U
-+    // .. ..     ==> MASK : 0x00000001U    VAL : 0x00000001U
-+    // .. .. 
-+    EMIT_MASKWRITE(0XF8008000, 0x00000001U ,0x00000001U),
-+    // .. .. n32BitEn = 1
-+    // .. .. ==> 0XF8008014[0:0] = 0x00000001U
-+    // .. ..     ==> MASK : 0x00000001U    VAL : 0x00000001U
-+    // .. .. 
-+    EMIT_MASKWRITE(0XF8008014, 0x00000001U ,0x00000001U),
 +    // .. .. FINISH: AFI0 REGISTERS
 +    // .. .. START: AFI1 REGISTERS
-+    // .. .. n32BitEn = 1
-+    // .. .. ==> 0XF8009000[0:0] = 0x00000001U
-+    // .. ..     ==> MASK : 0x00000001U    VAL : 0x00000001U
-+    // .. .. 
-+    EMIT_MASKWRITE(0XF8009000, 0x00000001U ,0x00000001U),
-+    // .. .. n32BitEn = 1
-+    // .. .. ==> 0XF8009014[0:0] = 0x00000001U
-+    // .. ..     ==> MASK : 0x00000001U    VAL : 0x00000001U
-+    // .. .. 
-+    EMIT_MASKWRITE(0XF8009014, 0x00000001U ,0x00000001U),
 +    // .. .. FINISH: AFI1 REGISTERS
 +    // .. .. START: AFI2 REGISTERS
-+    // .. .. n32BitEn = 1
-+    // .. .. ==> 0XF800A000[0:0] = 0x00000001U
-+    // .. ..     ==> MASK : 0x00000001U    VAL : 0x00000001U
-+    // .. .. 
-+    EMIT_MASKWRITE(0XF800A000, 0x00000001U ,0x00000001U),
-+    // .. .. n32BitEn = 1
-+    // .. .. ==> 0XF800A014[0:0] = 0x00000001U
-+    // .. ..     ==> MASK : 0x00000001U    VAL : 0x00000001U
-+    // .. .. 
-+    EMIT_MASKWRITE(0XF800A014, 0x00000001U ,0x00000001U),
 +    // .. .. FINISH: AFI2 REGISTERS
 +    // .. .. START: AFI3 REGISTERS
 +    // .. .. FINISH: AFI3 REGISTERS
@@ -6746,17 +6713,14 @@ Index: u-boot-2019.07/board/xilinx/zynq/zynq-red-pitaya16/ps7_init_gpl.c
 +    // .. Speed = 1
 +    // .. ==> 0XF800074C[8:8] = 0x00000001U
 +    // ..     ==> MASK : 0x00000100U    VAL : 0x00000100U
-+    // .. IO_Type = 2
-+    // .. ==> 0XF800074C[11:9] = 0x00000002U
-+    // ..     ==> MASK : 0x00000E00U    VAL : 0x00000400U
 +    // .. PULLUP = 0
 +    // .. ==> 0XF800074C[12:12] = 0x00000000U
 +    // ..     ==> MASK : 0x00001000U    VAL : 0x00000000U
-+    // .. DisableRcvr = 0
-+    // .. ==> 0XF800074C[13:13] = 0x00000000U
-+    // ..     ==> MASK : 0x00002000U    VAL : 0x00000000U
++    // .. DisableRcvr = 1
++    // .. ==> 0XF800074C[13:13] = 0x00000001U
++    // ..     ==> MASK : 0x00002000U    VAL : 0x00002000U
 +    // .. 
-+    EMIT_MASKWRITE(0XF800074C, 0x00003FFFU ,0x00000502U),
++    EMIT_MASKWRITE(0XF800074C, 0x000031FFU ,0x00002102U),
 +    // .. TRI_ENABLE = 0
 +    // .. ==> 0XF8000750[0:0] = 0x00000000U
 +    // ..     ==> MASK : 0x00000001U    VAL : 0x00000000U
@@ -8135,40 +8099,10 @@ Index: u-boot-2019.07/board/xilinx/zynq/zynq-red-pitaya16/ps7_init_gpl.c
 +    // .. FINISH: FPGA RESETS TO 0
 +    // .. START: AFI REGISTERS
 +    // .. .. START: AFI0 REGISTERS
-+    // .. .. n32BitEn = 1
-+    // .. .. ==> 0XF8008000[0:0] = 0x00000001U
-+    // .. ..     ==> MASK : 0x00000001U    VAL : 0x00000001U
-+    // .. .. 
-+    EMIT_MASKWRITE(0XF8008000, 0x00000001U ,0x00000001U),
-+    // .. .. n32BitEn = 1
-+    // .. .. ==> 0XF8008014[0:0] = 0x00000001U
-+    // .. ..     ==> MASK : 0x00000001U    VAL : 0x00000001U
-+    // .. .. 
-+    EMIT_MASKWRITE(0XF8008014, 0x00000001U ,0x00000001U),
 +    // .. .. FINISH: AFI0 REGISTERS
 +    // .. .. START: AFI1 REGISTERS
-+    // .. .. n32BitEn = 1
-+    // .. .. ==> 0XF8009000[0:0] = 0x00000001U
-+    // .. ..     ==> MASK : 0x00000001U    VAL : 0x00000001U
-+    // .. .. 
-+    EMIT_MASKWRITE(0XF8009000, 0x00000001U ,0x00000001U),
-+    // .. .. n32BitEn = 1
-+    // .. .. ==> 0XF8009014[0:0] = 0x00000001U
-+    // .. ..     ==> MASK : 0x00000001U    VAL : 0x00000001U
-+    // .. .. 
-+    EMIT_MASKWRITE(0XF8009014, 0x00000001U ,0x00000001U),
 +    // .. .. FINISH: AFI1 REGISTERS
 +    // .. .. START: AFI2 REGISTERS
-+    // .. .. n32BitEn = 1
-+    // .. .. ==> 0XF800A000[0:0] = 0x00000001U
-+    // .. ..     ==> MASK : 0x00000001U    VAL : 0x00000001U
-+    // .. .. 
-+    EMIT_MASKWRITE(0XF800A000, 0x00000001U ,0x00000001U),
-+    // .. .. n32BitEn = 1
-+    // .. .. ==> 0XF800A014[0:0] = 0x00000001U
-+    // .. ..     ==> MASK : 0x00000001U    VAL : 0x00000001U
-+    // .. .. 
-+    EMIT_MASKWRITE(0XF800A014, 0x00000001U ,0x00000001U),
 +    // .. .. FINISH: AFI2 REGISTERS
 +    // .. .. START: AFI3 REGISTERS
 +    // .. .. FINISH: AFI3 REGISTERS
@@ -10852,17 +10786,14 @@ Index: u-boot-2019.07/board/xilinx/zynq/zynq-red-pitaya16/ps7_init_gpl.c
 +    // .. Speed = 1
 +    // .. ==> 0XF800074C[8:8] = 0x00000001U
 +    // ..     ==> MASK : 0x00000100U    VAL : 0x00000100U
-+    // .. IO_Type = 2
-+    // .. ==> 0XF800074C[11:9] = 0x00000002U
-+    // ..     ==> MASK : 0x00000E00U    VAL : 0x00000400U
 +    // .. PULLUP = 0
 +    // .. ==> 0XF800074C[12:12] = 0x00000000U
 +    // ..     ==> MASK : 0x00001000U    VAL : 0x00000000U
-+    // .. DisableRcvr = 0
-+    // .. ==> 0XF800074C[13:13] = 0x00000000U
-+    // ..     ==> MASK : 0x00002000U    VAL : 0x00000000U
++    // .. DisableRcvr = 1
++    // .. ==> 0XF800074C[13:13] = 0x00000001U
++    // ..     ==> MASK : 0x00002000U    VAL : 0x00002000U
 +    // .. 
-+    EMIT_MASKWRITE(0XF800074C, 0x00003FFFU ,0x00000502U),
++    EMIT_MASKWRITE(0XF800074C, 0x000031FFU ,0x00002102U),
 +    // .. TRI_ENABLE = 0
 +    // .. ==> 0XF8000750[0:0] = 0x00000000U
 +    // ..     ==> MASK : 0x00000001U    VAL : 0x00000000U
@@ -12241,40 +12172,10 @@ Index: u-boot-2019.07/board/xilinx/zynq/zynq-red-pitaya16/ps7_init_gpl.c
 +    // .. FINISH: FPGA RESETS TO 0
 +    // .. START: AFI REGISTERS
 +    // .. .. START: AFI0 REGISTERS
-+    // .. .. n32BitEn = 1
-+    // .. .. ==> 0XF8008000[0:0] = 0x00000001U
-+    // .. ..     ==> MASK : 0x00000001U    VAL : 0x00000001U
-+    // .. .. 
-+    EMIT_MASKWRITE(0XF8008000, 0x00000001U ,0x00000001U),
-+    // .. .. n32BitEn = 1
-+    // .. .. ==> 0XF8008014[0:0] = 0x00000001U
-+    // .. ..     ==> MASK : 0x00000001U    VAL : 0x00000001U
-+    // .. .. 
-+    EMIT_MASKWRITE(0XF8008014, 0x00000001U ,0x00000001U),
 +    // .. .. FINISH: AFI0 REGISTERS
 +    // .. .. START: AFI1 REGISTERS
-+    // .. .. n32BitEn = 1
-+    // .. .. ==> 0XF8009000[0:0] = 0x00000001U
-+    // .. ..     ==> MASK : 0x00000001U    VAL : 0x00000001U
-+    // .. .. 
-+    EMIT_MASKWRITE(0XF8009000, 0x00000001U ,0x00000001U),
-+    // .. .. n32BitEn = 1
-+    // .. .. ==> 0XF8009014[0:0] = 0x00000001U
-+    // .. ..     ==> MASK : 0x00000001U    VAL : 0x00000001U
-+    // .. .. 
-+    EMIT_MASKWRITE(0XF8009014, 0x00000001U ,0x00000001U),
 +    // .. .. FINISH: AFI1 REGISTERS
 +    // .. .. START: AFI2 REGISTERS
-+    // .. .. n32BitEn = 1
-+    // .. .. ==> 0XF800A000[0:0] = 0x00000001U
-+    // .. ..     ==> MASK : 0x00000001U    VAL : 0x00000001U
-+    // .. .. 
-+    EMIT_MASKWRITE(0XF800A000, 0x00000001U ,0x00000001U),
-+    // .. .. n32BitEn = 1
-+    // .. .. ==> 0XF800A014[0:0] = 0x00000001U
-+    // .. ..     ==> MASK : 0x00000001U    VAL : 0x00000001U
-+    // .. .. 
-+    EMIT_MASKWRITE(0XF800A014, 0x00000001U ,0x00000001U),
 +    // .. .. FINISH: AFI2 REGISTERS
 +    // .. .. START: AFI3 REGISTERS
 +    // .. .. FINISH: AFI3 REGISTERS
