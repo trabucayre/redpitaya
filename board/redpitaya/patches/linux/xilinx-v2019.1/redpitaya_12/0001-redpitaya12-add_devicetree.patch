@@ -1,0 +1,28 @@
+Index: linux-xilinx-v2019.1/arch/arm/boot/dts/zynq-red_pitaya.dts
+===================================================================
+--- linux-xilinx-v2019.1/arch/arm/boot/dts/zynq-red_pitaya.dts
++++ linux-xilinx-v2019.1/arch/arm/boot/dts/zynq-red_pitaya.dts
+@@ -47,7 +47,7 @@
+ 		compatible = "gpio-leds";
+ 		led-8-yellow {
+ 			label = "led8";
+-			gpios = <&gpio0 0 0>;
++			gpios = <&gpio0 6 0>;
+ 			default-state = "off";
+ 			linux,default-trigger = "mmc0";
+ 		};
+@@ -83,6 +83,14 @@
+ 		reg = <0x50>;
+ 		pagesize = <32>;
+ 	};
++	osc@55 {
++		#clock-cells = <0>;
++		compatible = "silabs,si570";
++		reg = <0x55>;
++		factory-fout = <100000000>;
++		clock-frequency = <250000000>;
++		temperature-stability = <50>;
++	};
+ };
+ 
+ &sdhci0 {
