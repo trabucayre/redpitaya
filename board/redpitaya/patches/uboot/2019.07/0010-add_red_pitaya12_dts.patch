@@ -6,7 +6,7 @@ Index: u-boot-2019.07/arch/arm/dts/Makefile
  	zynq-picozed.dtb \
  	zynq-red-pitaya.dtb \
  	zynq-red-pitaya16.dtb \
-+       zynq-red-pitaya12.dtb \
++	zynq-red-pitaya12.dtb \
  	zynq-syzygy-hub.dtb \
  	zynq-topic-miami.dtb \
  	zynq-topic-miamilite.dtb \
