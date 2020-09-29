@@ -14,7 +14,7 @@ Index: u-boot-2019.07/arch/arm/dts/zynq-red-pitaya12.dts
 ===================================================================
 --- /dev/null
 +++ u-boot-2019.07/arch/arm/dts/zynq-red-pitaya12.dts
-@@ -0,0 +1,84 @@
+@@ -0,0 +1,73 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Red Pitaya12 board DTS
@@ -87,15 +87,4 @@ Index: u-boot-2019.07/arch/arm/dts/zynq-red-pitaya12.dts
 +	status = "okay";
 +	dr_mode = "host";
 +	usb-phy = <&usb_phy0>;
-+};
-+
-+&i2c0 {
-+	osc@55 {
-+		#clock-cells = <0>;
-+		compatible = "silabs,si570";
-+		reg = <0x55>;
-+		factory-fout = <100000000>;
-+		clock-frequency = <250000000>;
-+		temperature-stability = <50>;
-+	};
 +};
