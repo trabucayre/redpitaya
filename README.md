@@ -37,7 +37,6 @@ or for 12-bit Redpitaya
 ```bash
 make redpitaya12_defconfig
 ```
-
 to configure buildroot
 
 ### build all
