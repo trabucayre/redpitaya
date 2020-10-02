@@ -1,6 +1,6 @@
 # redpitaya
 
-This repository provides buildroot based support for redpitaya (14 and 16 bits) board.
+This repository provides buildroot based support for redpitaya (12, 14, and 16 bits) board.
 
 It uses the BR2_EXTERNAL mecanism to add this support in buildroot.
 
@@ -33,6 +33,11 @@ or for real time extension of Linux for the 14-bit Redpitaya
 ```bash
 make redpitaya_xenomai_defconfig
 ```
+or for 12-bit Redpitaya
+```bash
+make redpitaya12_defconfig
+```
+
 to configure buildroot
 
 ### build all
