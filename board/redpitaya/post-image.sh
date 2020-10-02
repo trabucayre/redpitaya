@@ -4,9 +4,23 @@
 # let's use a symlink with that name that points to the current
 # devicetree in the config.
 
-CURRENT_DT=$(sed -n 's/^BR2_LINUX_KERNEL_INTREE_DTS_NAME="\(.*\)"$/\1/p' \
-	${BR2_CONFIG})
+DTB="$(sed -n 's/^BR2_LINUX_KERNEL_INTREE_DTS_NAME="\([\/a-z0-9_ \-]*\)"$/\1/p' ${BR2_CONFIG})"
+BOARD_PATH="$(dirname $0)"
 
-[ -z "${CURRENT_DT}" ] || ln -fs ${CURRENT_DT}.dtb ${BINARIES_DIR}/zynq-red_pitaya.dtb
+GENIMAGE_CFG="$(mktemp --suffix genimage.cfg)"
+GENIMAGE_TMP="${BUILD_DIR}/genimage.tmp"
 
-support/scripts/genimage.sh -c "${3}"
+sed -e "s/%DTBFILE%/${DTB}/" \
+    ${BOARD_PATH}/genimage-template.cfg \
+    > ${GENIMAGE_CFG}
+
+rm -rf "${GENIMAGE_TMP}"
+
+genimage \
+    --rootpath "${TARGET_DIR}" \
+    --tmppath "${GENIMAGE_TMP}" \
+    --inputpath "${BINARIES_DIR}" \
+    --outputpath "${BINARIES_DIR}" \
+    --config "${GENIMAGE_CFG}"
+
+rm -f ${GENIMAGE_CFG}
