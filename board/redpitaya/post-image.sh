@@ -1,8 +1,7 @@
 #!/bin/sh
 
-# By default U-Boot loads DTB from a file named "zynq-red_pitaya.dtb", so
-# let's use a symlink with that name that points to the current
-# devicetree in the config.
+# include the linux device tree name corresponding to the desired
+# configuration to the genimage configuration file
 
 DTB="$(sed -n 's/^BR2_LINUX_KERNEL_INTREE_DTS_NAME="\([\/a-z0-9_ \-]*\)"$/\1/p' ${BR2_CONFIG})"
 BOARD_PATH="$(dirname $0)"
