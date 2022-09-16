@@ -1,0 +1,35 @@
+Index: u-boot-2022.07/include/configs/zynq-common.h
+===================================================================
+--- u-boot-2022.07.orig/include/configs/zynq-common.h
++++ u-boot-2022.07/include/configs/zynq-common.h
+@@ -193,7 +193,30 @@
+ 	"pxefile_addr_r=0x2000000\0"    \
+ 	"kernel_addr_r=0x2000000\0"     \
+ 	"scriptaddr=0x3000000\0"        \
++	"loadbootenv_addr=0x2000000\0" \
+ 	"ramdisk_addr_r=0x3100000\0"    \
++	"mmcdev=0\0" \
++	"bootenv=uEnv.txt\0" \
++    "loadbootenv=load mmc ${mmcdev} ${loadbootenv_addr} ${bootenv}\0" \
++	"importbootenv=echo Importing environment from ${bootenv_dev} ...; " \
++		"env import -t ${loadbootenv_addr} $filesize\0" \
++	"bootenv_existence_test=test -e ${bootenv_dev} 0 /${bootenv}\0" \
++	"setbootenv=if env run bootenv_existence_test; then " \
++			"if env run loadbootenv; then " \
++				"env run importbootenv; " \
++			"fi; " \
++		"fi; \0" \
++	"sd_loadbootenv=setenv bootenv_dev mmc && " \
++			"run setbootenv \0" \
++	"prebootcmd=echo Preboot; " \
++			"if test $modeboot = sdboot; then " \
++			"run sd_loadbootenv; " \
++			"echo Checking if uenvcmd is set ...; " \
++			"if test -n $uenvcmd; then " \
++				"echo Running uenvcmd ...; " \
++				"run uenvcmd; " \
++			"fi; " \
++		"fi; \0" \
+ 	BOOTENV
+ #endif
+ 
