@@ -1,0 +1,15 @@
+Index: linux-xilinx-v2019.1/drivers/net/phy/intel-xway.c
+===================================================================
+--- linux-xilinx-v2019.1/drivers/net/phy/intel-xway.c
++++ linux-xilinx-v2019.1/drivers/net/phy/intel-xway.c
+@@ -171,6 +171,10 @@
+ 	/* Clear all pending interrupts */
+ 	phy_read(phydev, XWAY_MDIO_ISTAT);
+ 
++	err = phy_write(phydev, 0x17, 0xb500);
++	if (err)
++		return err;
++
+ 	phy_write_mmd(phydev, MDIO_MMD_VEND2, XWAY_MMD_LEDCH,
+ 		      XWAY_MMD_LEDCH_NACS_NONE |
+ 		      XWAY_MMD_LEDCH_SBF_F02HZ |
