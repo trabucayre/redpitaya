@@ -21,19 +21,19 @@ BR2_EXTERNAL=/somewhere/redpitaya</code> in *.bashrc*).
 
 Now, in buildroot directory:
 
-You can use for 14-bit Redpitaya
+You can use for STEMLab 125-14 Redpitaya
 ```bash
 make redpitaya_defconfig
 ```
-or for 16-bit Redpitaya
+or for SDRLab 122-16 Redpitaya
 ```bash
 make redpitaya16_defconfig
 ```
-or for real time extension of Linux for the 14-bit Redpitaya
+or for real time extension of Linux for STEMLab 125-14 Redpitaya
 ```bash
 make redpitaya_xenomai_defconfig
 ```
-or for 12-bit Redpitaya
+or for SIGNALlab 250-12 Redpitaya
 ```bash
 make redpitaya12_defconfig
 ```
