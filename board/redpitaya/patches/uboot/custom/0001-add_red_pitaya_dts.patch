@@ -1,0 +1,107 @@
+Index: u-boot-xlnx-xlnx_rebase_v2025.01_2025.1/arch/arm/dts/Makefile
+===================================================================
+--- u-boot-xlnx-xlnx_rebase_v2025.01_2025.1.orig/arch/arm/dts/Makefile
++++ u-boot-xlnx-xlnx_rebase_v2025.01_2025.1/arch/arm/dts/Makefile
+@@ -236,6 +236,7 @@ dtb-$(CONFIG_ARCH_ZYNQ) += \
+ 	zynq-microzed.dtb \
+ 	zynq-minized.dtb \
+ 	zynq-picozed.dtb \
++	zynq-red-pitaya.dtb \
+ 	zynq-syzygy-hub.dtb \
+ 	zynq-topic-miami.dtb \
+ 	zynq-topic-miamilite.dtb \
+Index: u-boot-xlnx-xlnx_rebase_v2025.01_2025.1/arch/arm/dts/zynq-red-pitaya.dts
+===================================================================
+--- /dev/null
++++ u-boot-xlnx-xlnx_rebase_v2025.01_2025.1/arch/arm/dts/zynq-red-pitaya.dts
+@@ -0,0 +1,90 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Red Pitaya board DTS
++ *
++ *  Copyright (C) 2016 - 2025 Gwenhael Goavec-Merou <gwenhael.goavec-merou@trabucayre.com>
++ *
++ */
++/dts-v1/;
++#include "zynq-7000.dtsi"
++#include <dt-bindings/gpio/gpio.h>
++
++/ {
++	model = "Red Pitaya Board";
++	compatible = "redpitaya,zynq-red-pitaya", "xlnx,zynq-7000";
++
++	aliases {
++		ethernet0 = &gem0;
++		serial0 = &uart0;
++		spi0 = &qspi;
++		mmc0 = &sdhci0;
++	};
++
++	memory@0 {
++		device_type = "memory";
++		reg = <0x0 0x20000000>;
++	};
++
++	chosen {
++		bootargs = "earlyprintk";
++		stdout-path = "serial0:115200n8";
++	};
++
++         gpio-leds {
++                compatible = "gpio-leds";
++                led-8-yellow {
++                        label = "led8";
++                        gpios = <&gpio0 0 0>;
++                        default-state = "off";
++                        linux,default-trigger = "mmc0";
++                };
++                led-9-red {
++                        label = "led9";
++                        gpios = <&gpio0 7 0>;
++                        default-state = "off";
++                        linux,default-trigger = "heartbeat";
++                };
++        };
++
++	usb_phy0: phy0 {
++		#phy-cells = <0>;
++		compatible = "usb-nop-xceiv";
++		reset-gpios = <&gpio0 46 GPIO_ACTIVE_LOW>;
++	};
++};
++
++&clkc {
++	ps-clk-frequency = <33333333>;
++};
++
++&gem0 {
++	status = "okay";
++	phy-mode = "rgmii-id";
++	phy-handle = <&ethernet_phy>;
++
++	ethernet_phy: ethernet-phy@1 {
++		reg = <1>;
++		device_type = "ethernet-phy";
++	};
++};
++
++&qspi {
++	bootph-all;
++	status = "okay";
++};
++
++&sdhci0 {
++	bootph-all;
++	status = "okay";
++};
++
++&uart0 {
++	bootph-all;
++	status = "okay";
++};
++
++&usb0 {
++	status = "okay";
++	dr_mode = "host";
++	usb-phy = <&usb_phy0>;
++};

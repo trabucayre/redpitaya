@@ -2,15 +2,15 @@ Index: u-boot-2022.07/include/configs/zynq-common.h
 ===================================================================
 --- u-boot-2022.07.orig/include/configs/zynq-common.h
 +++ u-boot-2022.07/include/configs/zynq-common.h
-@@ -193,7 +193,30 @@
+@@ -176,7 +176,30 @@
+ 	"fdt_addr_r=0x1f00000\0"        \
  	"pxefile_addr_r=0x2000000\0"    \
  	"kernel_addr_r=0x2000000\0"     \
- 	"scriptaddr=0x3000000\0"        \
 +	"loadbootenv_addr=0x2000000\0" \
  	"ramdisk_addr_r=0x3100000\0"    \
 +	"mmcdev=0\0" \
 +	"bootenv=uEnv.txt\0" \
-+    "loadbootenv=load mmc ${mmcdev} ${loadbootenv_addr} ${bootenv}\0" \
++	"loadbootenv=load mmc ${mmcdev} ${loadbootenv_addr} ${bootenv}\0" \
 +	"importbootenv=echo Importing environment from ${bootenv_dev} ...; " \
 +		"env import -t ${loadbootenv_addr} $filesize\0" \
 +	"bootenv_existence_test=test -e ${bootenv_dev} 0 /${bootenv}\0" \

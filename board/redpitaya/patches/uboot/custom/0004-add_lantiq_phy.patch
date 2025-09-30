@@ -1,20 +1,20 @@
-Index: u-boot-2016.01-rc3/drivers/net/phy/Makefile
+Index: u-boot-xlnx-xlnx_rebase_v2025.01_2025.1/drivers/net/phy/Makefile
 ===================================================================
---- u-boot-2016.01-rc3.orig/drivers/net/phy/Makefile
-+++ u-boot-2016.01-rc3/drivers/net/phy/Makefile
-@@ -16,6 +16,7 @@ obj-$(CONFIG_PHY_ATHEROS) += atheros.o
- obj-$(CONFIG_PHY_BROADCOM) += broadcom.o
+--- u-boot-xlnx-xlnx_rebase_v2025.01_2025.1.orig/drivers/net/phy/Makefile
++++ u-boot-xlnx-xlnx_rebase_v2025.01_2025.1/drivers/net/phy/Makefile
+@@ -17,6 +17,7 @@ obj-$(CONFIG_PHY_BROADCOM) += broadcom.o
  obj-$(CONFIG_PHY_CORTINA) += cortina.o
+ obj-$(CONFIG_PHY_CORTINA_ACCESS) += ca_phy.o
  obj-$(CONFIG_PHY_DAVICOM) += davicom.o
 +obj-$(CONFIG_PHY_LANTIQ) += lantiq.o
  obj-$(CONFIG_PHY_ET1011C) += et1011c.o
  obj-$(CONFIG_PHY_LXT) += lxt.o
  obj-$(CONFIG_PHY_MARVELL) += marvell.o
-Index: u-boot-2016.01-rc3/drivers/net/phy/lantiq.c
+Index: u-boot-xlnx-xlnx_rebase_v2025.01_2025.1/drivers/net/phy/lantiq.c
 ===================================================================
 --- /dev/null
-+++ u-boot-2016.01-rc3/drivers/net/phy/lantiq.c
-@@ -0,0 +1,79 @@
++++ u-boot-xlnx-xlnx_rebase_v2025.01_2025.1/drivers/net/phy/lantiq.c
+@@ -0,0 +1,72 @@
 +/*
 + * Lantiq PHY drivers
 + *
@@ -78,67 +78,26 @@ Index: u-boot-2016.01-rc3/drivers/net/phy/lantiq.c
 +	return 0;
 +}
 +
-+static struct phy_driver PHY11G_driver =  {
-+	.name = "PHY11G",
-+	.uid = 0xd565a401,
-+	.mask = 0xffffffff,
++U_BOOT_PHY_DRIVER(PHY11G) =  {
++	.name     = "PHY11G",
++	.uid      = 0xd565a401,
++	.mask     = 0xffffffff,
 +	.features = PHY_GBIT_FEATURES,
-+	.config = phy11g_config,
-+	.startup = genphy_startup,
-+	.shutdown = genphy_shutdown,
++	.config   = &phy11g_config,
++	.startup  = &genphy_startup,
++	.shutdown = &genphy_shutdown,
 +};
+Index: u-boot-xlnx-xlnx_rebase_v2025.01_2025.1/drivers/net/phy/Kconfig
+===================================================================
+--- u-boot-xlnx-xlnx_rebase_v2025.01_2025.1.orig/drivers/net/phy/Kconfig
++++ u-boot-xlnx-xlnx_rebase_v2025.01_2025.1/drivers/net/phy/Kconfig
+@@ -174,6 +174,9 @@ config PHY_DAVICOM
+ config PHY_ET1011C
+ 	bool "LSI TruePHY ET1011C support"
+ 
++config PHY_LANTIQ
++	bool "LANTIQ Ethernet PHY support"
 +
-+int phy_lantiq_init(void)
-+{
-+	phy_register(&PHY11G_driver);
-+
-+	return 0;
-+}
-Index: u-boot-2016.01-rc3/drivers/net/phy/phy.c
-===================================================================
---- u-boot-2016.01-rc3.orig/drivers/net/phy/phy.c
-+++ u-boot-2016.01-rc3/drivers/net/phy/phy.c
-@@ -464,6 +464,9 @@ int phy_init(void)
- #ifdef CONFIG_PHY_ET1011C
- 	phy_et1011c_init();
- #endif
-+#ifdef CONFIG_PHY_LANTIQ
-+	phy_lantiq_init();
-+#endif
- #ifdef CONFIG_PHY_LXT
- 	phy_lxt_init();
- #endif
-Index: u-boot-2016.01-rc3/include/linux/mii.h
-===================================================================
---- u-boot-2016.01-rc3.orig/include/linux/mii.h
-+++ u-boot-2016.01-rc3/include/linux/mii.h
-@@ -19,6 +19,8 @@
- #define MII_EXPANSION	    0x06	/* Expansion register	       */
- #define MII_CTRL1000	    0x09	/* 1000BASE-T control	       */
- #define MII_STAT1000	    0x0a	/* 1000BASE-T status	       */
-+#define MII_MMD_CTRL	    0x0d	/* MMD Access Control Register */
-+#define MII_MMD_DATA	    0x0e	/* MMD Access Data Register    */
- #define MII_ESTATUS	    0x0f	/* Extended Status */
- #define MII_DCOUNTER	    0x12	/* Disconnect counter	       */
- #define MII_FCSCOUNTER	    0x13	/* False carrier counter       */
-Index: u-boot-2016.01-rc3/include/phy.h
-===================================================================
---- u-boot-2016.01-rc3.orig/include/phy.h
-+++ u-boot-2016.01-rc3/include/phy.h
-@@ -33,7 +33,7 @@
- 				SUPPORTED_10000baseT_Full)
+ config PHY_LXT
+ 	bool "LXT971 Ethernet PHY support"
  
- #ifndef PHY_ANEG_TIMEOUT
--#define PHY_ANEG_TIMEOUT	4000
-+#define PHY_ANEG_TIMEOUT	10000
- #endif
- 
- 
-@@ -245,6 +245,7 @@ int phy_cortina_init(void);
- int phy_davicom_init(void);
- int phy_et1011c_init(void);
- int phy_lxt_init(void);
-+int phy_lantiq_init(void);
- int phy_marvell_init(void);
- int phy_micrel_init(void);
- int phy_natsemi_init(void);
