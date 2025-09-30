@@ -4,14 +4,14 @@ This repository provides buildroot based support for redpitaya (12, 14, and 16 b
 
 It uses the BR2_EXTERNAL mecanism to add this support in buildroot.
 
-This support has been tested with the latest stable release of buildroot (2024.11.1).
+This support has been tested with the latest stable release of buildroot (2025.08).
 
 How-to use it
 -------------
 ### Download
 You need to download corresponding tarball:
 ```bash
-wget https://buildroot.org/downloads/buildroot-2024.11.1.tar.gz
+wget https://buildroot.org/downloads/buildroot-2025.08.tar.gz
 ```
 
 ### Configure environment
