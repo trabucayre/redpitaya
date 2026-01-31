@@ -1,0 +1,4 @@
+config BR2_PACKAGE_LITEX_ETHERBONE_SERVER
+	bool "LiteX EtherBone Server"
+	help
+	  Server between Zynq Memory and litex_server
