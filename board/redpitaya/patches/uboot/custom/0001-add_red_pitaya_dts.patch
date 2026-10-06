@@ -93,7 +93,7 @@ Index: u-boot-xlnx-xlnx_rebase_v2025.01_2025.1/arch/arm/dts/zynq-red-pitaya.dts
 +	pinctrl-0 = <&pinctrl_i2c0_default>;
 +
 +	eep@50 {
-+		compatible = "24c64";
++		compatible = "atmel,24c64";
 +		reg = <0x50>;
 +		pagesize = <32>;
 +	};
