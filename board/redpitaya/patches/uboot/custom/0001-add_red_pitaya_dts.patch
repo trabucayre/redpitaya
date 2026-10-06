@@ -14,7 +14,7 @@ Index: u-boot-xlnx-xlnx_rebase_v2025.01_2025.1/arch/arm/dts/zynq-red-pitaya.dts
 ===================================================================
 --- /dev/null
 +++ u-boot-xlnx-xlnx_rebase_v2025.01_2025.1/arch/arm/dts/zynq-red-pitaya.dts
-@@ -0,0 +1,90 @@
+@@ -0,0 +1,120 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Red Pitaya board DTS
@@ -32,6 +32,7 @@ Index: u-boot-xlnx-xlnx_rebase_v2025.01_2025.1/arch/arm/dts/zynq-red-pitaya.dts
 +
 +	aliases {
 +		ethernet0 = &gem0;
++		i2c0 = &i2c0;
 +		serial0 = &uart0;
 +		spi0 = &qspi;
 +		mmc0 = &sdhci0;
@@ -47,21 +48,21 @@ Index: u-boot-xlnx-xlnx_rebase_v2025.01_2025.1/arch/arm/dts/zynq-red-pitaya.dts
 +		stdout-path = "serial0:115200n8";
 +	};
 +
-+         gpio-leds {
-+                compatible = "gpio-leds";
-+                led-8-yellow {
-+                        label = "led8";
-+                        gpios = <&gpio0 0 0>;
-+                        default-state = "off";
-+                        linux,default-trigger = "mmc0";
-+                };
-+                led-9-red {
-+                        label = "led9";
-+                        gpios = <&gpio0 7 0>;
-+                        default-state = "off";
-+                        linux,default-trigger = "heartbeat";
-+                };
-+        };
++	 gpio-leds {
++		compatible = "gpio-leds";
++		led-8-yellow {
++			label = "led8";
++			gpios = <&gpio0 0 0>;
++			default-state = "off";
++			linux,default-trigger = "mmc0";
++		};
++		led-9-red {
++			label = "led9";
++			gpios = <&gpio0 7 0>;
++			default-state = "off";
++			linux,default-trigger = "heartbeat";
++		};
++	};
 +
 +	usb_phy0: phy0 {
 +		#phy-cells = <0>;
@@ -82,6 +83,35 @@ Index: u-boot-xlnx-xlnx_rebase_v2025.01_2025.1/arch/arm/dts/zynq-red-pitaya.dts
 +	ethernet_phy: ethernet-phy@1 {
 +		reg = <1>;
 +		device_type = "ethernet-phy";
++	};
++};
++
++&i2c0 {
++	status = "okay";
++	clock-frequency = <400000>;
++	pinctrl-names = "default", "gpio";
++	pinctrl-0 = <&pinctrl_i2c0_default>;
++
++	eep@50 {
++		compatible = "24c64";
++		reg = <0x50>;
++		pagesize = <32>;
++	};
++};
++
++&pinctrl0 {
++	pinctrl_i2c0_default: i2c0-default {
++		mux {
++			groups = "i2c0_10_grp";
++			function = "i2c0";
++		};
++
++		conf {
++			groups = "i2c0_10_grp";
++			bias-pull-up;
++			slew-rate = <0>;
++			power-source = <1>;
++		};
 +	};
 +};
 +
