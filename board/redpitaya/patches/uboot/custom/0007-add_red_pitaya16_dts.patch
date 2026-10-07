@@ -1,8 +1,8 @@
-Index: u-boot-2019.07/arch/arm/dts/Makefile
+Index: u-boot-xlnx-xlnx-rebase-v2026.01_2026.1/arch/arm/dts/Makefile
 ===================================================================
---- u-boot-2019.07.orig/arch/arm/dts/Makefile
-+++ u-boot-2019.07/arch/arm/dts/Makefile
-@@ -223,6 +223,7 @@ dtb-$(CONFIG_ARCH_ZYNQ) += \
+--- u-boot-xlnx-xlnx-rebase-v2026.01_2026.1.orig/arch/arm/dts/Makefile
++++ u-boot-xlnx-xlnx-rebase-v2026.01_2026.1/arch/arm/dts/Makefile
+@@ -237,6 +237,7 @@ dtb-$(CONFIG_ARCH_ZYNQ) += \
  	zynq-minized.dtb \
  	zynq-picozed.dtb \
  	zynq-red-pitaya.dtb \
@@ -10,11 +10,11 @@ Index: u-boot-2019.07/arch/arm/dts/Makefile
  	zynq-syzygy-hub.dtb \
  	zynq-topic-miami.dtb \
  	zynq-topic-miamilite.dtb \
-Index: u-boot-2019.07/arch/arm/dts/zynq-red-pitaya16.dts
+Index: u-boot-xlnx-xlnx-rebase-v2026.01_2026.1/arch/arm/dts/zynq-red-pitaya16.dts
 ===================================================================
 --- /dev/null
-+++ u-boot-2019.07/arch/arm/dts/zynq-red-pitaya16.dts
-@@ -0,0 +1,73 @@
++++ u-boot-xlnx-xlnx-rebase-v2026.01_2026.1/arch/arm/dts/zynq-red-pitaya16.dts
+@@ -0,0 +1,104 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Red Pitaya16 board DTS
@@ -24,6 +24,7 @@ Index: u-boot-2019.07/arch/arm/dts/zynq-red-pitaya16.dts
 + */
 +/dts-v1/;
 +#include "zynq-7000.dtsi"
++#include <dt-bindings/gpio/gpio.h>
 +
 +/ {
 +	model = "Red Pitaya Board";
@@ -31,6 +32,7 @@ Index: u-boot-2019.07/arch/arm/dts/zynq-red-pitaya16.dts
 +
 +	aliases {
 +		ethernet0 = &gem0;
++		i2c0 = &i2c0;
 +		serial0 = &uart0;
 +		spi0 = &qspi;
 +		mmc0 = &sdhci0;
@@ -65,6 +67,35 @@ Index: u-boot-2019.07/arch/arm/dts/zynq-red-pitaya16.dts
 +	ethernet_phy: ethernet-phy@0 {
 +		reg = <0>;
 +		device_type = "ethernet-phy";
++	};
++};
++
++&i2c0 {
++	status = "okay";
++	clock-frequency = <400000>;
++	pinctrl-names = "default", "gpio";
++	pinctrl-0 = <&pinctrl_i2c0_default>;
++
++	eep@50 {
++		compatible = "atmel,24c64";
++		reg = <0x50>;
++		pagesize = <32>;
++	};
++};
++
++&pinctrl0 {
++	pinctrl_i2c0_default: i2c0-default {
++		mux {
++			groups = "i2c0_10_grp";
++			function = "i2c0";
++		};
++
++		conf {
++			groups = "i2c0_10_grp";
++			bias-pull-up;
++			slew-rate = <0>;
++			power-source = <1>;
++		};
 +	};
 +};
 +
