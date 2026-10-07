@@ -3,8 +3,8 @@
 #
 BR2_arm=y
 
-#	
-# armv7a cores	
+#
+# armv7a cores
 #
 BR2_cortex_a9=y
 
@@ -19,8 +19,8 @@ BR2_ARM_ENABLE_VFP=y
 #
 BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_6_18=y
 
-#	
-# GCC Options	
+#
+# GCC Options
 #
 BR2_TOOLCHAIN_BUILDROOT_CXX=y
 BR2_TOOLCHAIN_BUILDROOT_WCHAR=y
